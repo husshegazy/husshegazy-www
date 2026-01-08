@@ -1,20 +1,20 @@
 ---
-import { getCollection } from "astro:content";
+// import { getCollection } from "astro:content";
 import Header from "@/components/Header.astro";
 import { CONFIG } from "@/config";
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import { reformatDate, sortItemsByDateDesc } from "@/lib";
+// import { reformatDate, sortItemsByDateDesc } from "@/lib";
 
-const posts = (await getCollection("blog")).sort(sortItemsByDateDesc);
-const featuredBlogPosts = posts.filter(
-	({ data }) => data.isFeatured && data.category === "tech",
-);
-const featuredFoodPosts = posts.filter(
-	({ data }) => data.isFeatured && data.category === "food",
-);
-const featuredTravelPosts = posts.filter(
-	({ data }) => data.isFeatured && data.category === "travel",
-);
+// const posts = (await getCollection("blog")).sort(sortItemsByDateDesc);
+// const featuredBlogPosts = posts.filter(
+// 	({ data }) => data.isFeatured && data.category === "tech",
+// );
+// const featuredFoodPosts = posts.filter(
+// 	({ data }) => data.isFeatured && data.category === "food",
+// );
+// const featuredTravelPosts = posts.filter(
+// 	({ data }) => data.isFeatured && data.category === "travel",
+// );
 ---
 
 <BaseLayout description={CONFIG.meta.description}>
@@ -29,7 +29,7 @@ const featuredTravelPosts = posts.filter(
       </div>
     </div>
 
-    <div class="flex flex-col space-y-6 md:space-y-12">
+    <!-- <div class="flex flex-col space-y-6 md:space-y-12">
 
 			{/* Posts */}
       <div class="flex flex-col space-y-4 animate-slide-from-down-and-fade-4">
@@ -164,5 +164,5 @@ const featuredTravelPosts = posts.filter(
       </div>
 
     </div>
-  </div>
+  </div> -->
 </BaseLayout>
