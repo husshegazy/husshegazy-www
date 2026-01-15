@@ -49,7 +49,7 @@ export const CONFIG: SiteConfig = {
   name: "Huss Hegazy",
   headshot: "/headshot.jpg",
   title: "Software Developer",
-  description: `Hi I am Huss!`,
+  description: `👋 Hi!`,
   socials: [
     {
       platform: "GitHub",
