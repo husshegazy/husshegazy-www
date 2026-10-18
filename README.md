@@ -1,5 +1,7 @@
 # Astro Starter Kit: 
 
+Website: [husshegazy.io](https://husshegazy.io)
+
 ```sh
 bun create astro@latest -- --template blog
 ```
