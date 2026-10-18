@@ -1,169 +1,340 @@
 ---
-// import { getCollection } from "astro:content";
-import Header from "@/components/Header.astro";
-import { CONFIG } from "@/config";
 import BaseLayout from "@/layouts/BaseLayout.astro";
-// import { reformatDate, sortItemsByDateDesc } from "@/lib";
 
-// const posts = (await getCollection("blog")).sort(sortItemsByDateDesc);
-// const featuredBlogPosts = posts.filter(
-// 	({ data }) => data.isFeatured && data.category === "tech",
-// );
-// const featuredFoodPosts = posts.filter(
-// 	({ data }) => data.isFeatured && data.category === "food",
-// );
-// const featuredTravelPosts = posts.filter(
-// 	({ data }) => data.isFeatured && data.category === "travel",
-// );
+const description =
+    "Hussein Hegazy is a software developer currently working at Shopify.";
+
+const work = [
+    {
+        title: "Autopilot",
+        href: "https://www.shopify.com/editions/spring2026#introducing-campaign-autopilot",
+    },
+    {
+        title: "SMS",
+        href: "https://www.shopify.com/editions/winter2026#card-heading-shopify-messaging-supports-sms-marketing",
+    },
+    {
+        title: "WhatsApp Marketing",
+        href: "https://www.shopify.com/editions/spring2026#whatsapp-marketing-channel",
+    },
+    {
+        title: "Theme editor",
+        href: "https://www.shopify.com/editions/summer2025#theme-editor-improvements",
+    },
+];
+
+const things = [
+    "John le Carré’s George Smiley series",
+    "The Lord of the Rings book series",
+    "Stoner by John Williams",
+    "highagency.com blog post",
+    "Kobo Libra Colour",
+    "My Cousin Vinny",
+    "Digger by Alejandro G. Iñárritu",
+    "Nathan for You",
+    "The Rehearsal by Nathan Fielder",
+    "The Naked Gun",
+    "The Witcher series",
+    "Monk with Tony Shalhoub",
+    "The Elder Scrolls V: Skyrim",
+    "The Elder Scrolls IV: Oblivion",
+    "Earl Grey tea",
+    "Earl Grey tea with milk",
+    "Miss Vickie’s Jalapeño chips",
+    "Shawarma poutine",
+    "Costco rotisserie chicken",
+    "KOTN",
+    "Standing desk",
+    "LAMY Safari pen",
+    "Dotted notepad",
+    "Gary Vee inspiration (/s)",
+];
 ---
 
-<BaseLayout description={CONFIG.meta.description}>
-    <Header />
-    <div class="flex flex-col space-y-6 md:space-y-12 pb-8 pt-4">
-        <div class="flex flex-col md:px-6 animate-slide-from-down-and-fade-2">
-            <div class="flex flex-col space-y-2">
-                <span class="font-semibold">About me</span>
-                <span class="text-neutral-300/80 leading-6">
-                    {CONFIG.description}
-                </span>
+<BaseLayout description={description}>
+    <div class="page-shell">
+        <header class="hero">
+            <figure class="portrait-wrap">
+                <img
+                    class="portrait"
+                    src="/headshot.jpg"
+                    alt="Hussein Hegazy by the water"
+                    width="400"
+                    height="400"
+                />
+            </figure>
+
+            <div class="introduction">
+                <div class="identity-row">
+                    <h1>Hussein Hegazy</h1>
+                    <nav class="social-links" aria-label="Find Hussein online">
+                        <a href="https://github.com/husshegazy" rel="me noreferrer"
+                            >GitHub</a
+                        >
+                        <a href="https://x.com/husshegazy" rel="me noreferrer">X</a>
+                        <a
+                            href="https://www.linkedin.com/in/husshegazy/"
+                            rel="me noreferrer">LinkedIn</a
+                        >
+                        <a href="mailto:husshegazy@gmail.com">Email</a>
+                    </nav>
+                </div>
+                <p>
+                    I am Hussein, a software developer currently working at
+                    Shopify.
+                </p>
             </div>
-        </div>
+        </header>
 
-        <!-- <div class="flex flex-col space-y-6 md:space-y-12">
+        <main class="collections">
+            <section class="collection work" aria-labelledby="work-title">
+                <h2 id="work-title">Work</h2>
+                <ul>
+                    {
+                        work.map((item) => (
+                            <li>
+                                <a href={item.href} rel="noreferrer">
+                                    <span>{item.title}</span>
+                                    <span aria-hidden="true">↗</span>
+                                </a>
+                            </li>
+                        ))
+                    }
+                </ul>
+            </section>
 
-			{/* Posts */}
-      <div class="flex flex-col space-y-4 animate-slide-from-down-and-fade-4">
-        <div class="flex flex-col space-y-2">
-          <span class="font-semibold md:px-6">Featured Posts</span>
-          <div class="flex flex-col space-y-8 md:space-y-1 md:px-2">
-            {
-              featuredBlogPosts
-                .filter((post) => post.data.isFeatured === true)
-                .sort((a, b) => {
-                  if (
-                    new Date(a.data.publishedAt) > new Date(b.data.publishedAt)
-                  ) {
-                    return -1;
-                  }
-                  return 1;
-                })
-                .slice(0, 3)
-                .map((post) => (
-                  <a
-                    href={`/posts/${post.slug}`}
-                    class="flex flex-row justify-between space-x-2 items-start md:items-center duration-300 md:hover:bg-hoverBackground md:px-4 md:py-3 rounded-lg cursor-pointer"
-                  >
-                    <span class="text-secondaryDark">{post.data.title}</span>
-
-                    <span class="text-neutral-400 text-sm whitespace-nowrap">
-                      {reformatDate(post.data.publishedAt)}
-                    </span>
-                  </a>
-                ))
-            }
-          </div>
-        </div>
-        <a
-          href="/posts"
-          class="flex flex-row space-x-2 items-center md:px-6 group cursor-pointer justify-end"
-        >
-          <span
-            class="text-neutral-400 text-sm underline underline-offset-4 hover:text-secondary duration-200"
-          >
-            All Posts
-          </span>
-        </a>
-      </div>
-
-			{/* Food */}
-      <div class="flex flex-col space-y-4 animate-slide-from-down-and-fade-4">
-        <div class="flex flex-col space-y-2">
-          <span class="font-semibold md:px-6">Cousine</span>
-          <div class="flex flex-col space-y-8 md:space-y-1 md:px-2">
-            {
-              featuredFoodPosts
-                .filter((post) => post.data.isFeatured === true)
-                .sort((a, b) => {
-                  if (
-                    new Date(a.data.publishedAt) > new Date(b.data.publishedAt)
-                  ) {
-                    return -1;
-                  }
-                  return 1;
-                })
-                .slice(0, 3)
-                .map((post) => (
-                  <a
-                    href={`/posts/${post.slug}`}
-                    class="flex flex-row justify-between space-x-2 items-start md:items-center duration-300 md:hover:bg-hoverBackground md:px-4 md:py-3 rounded-lg cursor-pointer"
-                  >
-                    <span class="text-secondaryDark">{post.data.title}</span>
-
-                    <span class="text-neutral-400 text-sm whitespace-nowrap">
-                      {reformatDate(post.data.publishedAt)}
-                    </span>
-                  </a>
-                ))
-            }
-          </div>
-        </div>
-        <a
-          href="/posts"
-          class="flex flex-row space-x-2 items-center md:px-6 group cursor-pointer justify-end"
-        >
-          <span
-            class="text-neutral-400 text-sm underline underline-offset-4 hover:text-secondary duration-200"
-          >
-            All Posts
-          </span>
-        </a>
-      </div>
-
-			{/* Travels */}
-      <div class="flex flex-col space-y-4 animate-slide-from-down-and-fade-4">
-        <div class="flex flex-col space-y-2">
-          <span class="font-semibold md:px-6">My travels</span>
-          <div class="flex flex-col space-y-8 md:space-y-1 md:px-2">
-            {
-              featuredTravelPosts
-                .filter((post) => post.data.isFeatured === true)
-                .sort((a, b) => {
-                  if (
-                    new Date(a.data.publishedAt) > new Date(b.data.publishedAt)
-                  ) {
-                    return -1;
-                  }
-                  return 1;
-                })
-                .slice(0, 3)
-                .map((post) => (
-                  <a
-                    href={`/posts/${post.slug}`}
-                    class="flex flex-row justify-between space-x-2 items-start md:items-center duration-300 md:hover:bg-hoverBackground md:px-4 md:py-3 rounded-lg cursor-pointer"
-                  >
-                    <span class="text-secondaryDark">{post.data.title}</span>
-
-                    <span class="text-neutral-400 text-sm whitespace-nowrap">
-                      {reformatDate(post.data.publishedAt)}
-                    </span>
-                  </a>
-                ))
-            }
-          </div>
-        </div>
-        <a
-          href="/posts"
-          class="flex flex-row space-x-2 items-center md:px-6 group cursor-pointer justify-end"
-        >
-          <span
-            class="text-neutral-400 text-sm underline underline-offset-4 hover:text-secondary duration-200"
-          >
-            All Posts
-          </span>
-        </a>
-      </div>
-
-    </div>
-  </div> -->
+            <section class="collection things" aria-labelledby="things-title">
+                <h2 id="things-title">Things I like</h2>
+                <ul>
+                    {things.map((item) => <li class="thing">{item}</li>)}
+                </ul>
+            </section>
+        </main>
     </div>
 </BaseLayout>
+
+<style>
+    .page-shell {
+        width: min(100%, 76rem);
+        min-height: 100svh;
+        margin: 0 auto;
+        padding: clamp(1.5rem, 4vw, 3.5rem);
+    }
+
+    .hero {
+        display: grid;
+        grid-template-columns: 7rem minmax(0, 1fr);
+        gap: clamp(1.5rem, 3vw, 2.25rem);
+        align-items: center;
+    }
+
+    .portrait-wrap {
+        width: 7rem;
+        aspect-ratio: 1;
+        margin: 0;
+        overflow: hidden;
+        border-radius: 50%;
+        background: var(--panel);
+    }
+
+    .portrait {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        filter: saturate(0.92) contrast(1.03);
+    }
+
+    .introduction {
+        padding-top: 0.15rem;
+    }
+
+    .identity-row {
+        display: grid;
+        gap: 0.85rem;
+    }
+
+    h1 {
+        margin: 0;
+        color: var(--ink);
+        font-family: "Atkinson", Arial, sans-serif;
+        font-size: clamp(2rem, 4vw, 3.35rem);
+        font-weight: 700;
+        letter-spacing: -0.055em;
+        line-height: 0.95;
+    }
+
+    .social-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem 0.9rem;
+    }
+
+    .social-links a {
+        color: var(--ink);
+        font-family: "Atkinson", Arial, sans-serif;
+        font-size: 0.74rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-decoration-color: var(--accent);
+        text-decoration-thickness: 0.16rem;
+        text-underline-offset: 0.22rem;
+        text-transform: uppercase;
+    }
+
+    .social-links a:hover,
+    .social-links a:focus-visible {
+        color: var(--accent-strong);
+        text-decoration-color: var(--accent-strong);
+    }
+
+    .introduction p {
+        max-width: 48rem;
+        margin: 1rem 0 0;
+        color: var(--muted);
+        font-family: "Atkinson", Arial, sans-serif;
+        font-size: clamp(1rem, 1.7vw, 1.15rem);
+        line-height: 1.45;
+    }
+
+    .collections {
+        display: grid;
+        grid-template-columns: minmax(15rem, 0.8fr) minmax(18rem, 1.4fr);
+        gap: clamp(2.5rem, 6vw, 5rem);
+        align-items: start;
+        margin-top: clamp(2.25rem, 5vw, 3.5rem);
+    }
+
+    h2 {
+        margin: 0 0 1rem;
+        color: var(--ink);
+        font-family: "Atkinson", Arial, sans-serif;
+        font-size: 1.25rem;
+        font-weight: 700;
+        letter-spacing: -0.025em;
+        line-height: 1;
+    }
+
+    .collection ul {
+        display: grid;
+        gap: 0.65rem;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .collection li {
+        border: 0;
+    }
+
+    .work a,
+    .thing {
+        display: flex;
+        align-items: center;
+        min-height: 2rem;
+        padding: 0.15rem 0;
+        font-family: "Atkinson", Arial, sans-serif;
+        font-size: 0.94rem;
+        line-height: 1.3;
+    }
+
+    .work a {
+        justify-content: space-between;
+        gap: 1rem;
+        color: var(--ink);
+        text-decoration: none;
+    }
+
+    .work a span:last-child {
+        color: var(--accent-strong);
+        font-family: "Atkinson", Arial, sans-serif;
+        font-size: 0.85rem;
+    }
+
+    .work a:hover,
+    .work a:focus-visible {
+        color: var(--accent-strong);
+    }
+
+    .social-links a:focus-visible,
+    .work a:focus-visible {
+        outline: 2px solid var(--accent-strong);
+        outline-offset: 0.2rem;
+    }
+
+    .thing {
+        color: var(--ink);
+    }
+
+    @media (max-width: 760px) {
+        .collections {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+    }
+
+    @media (max-width: 560px) {
+        .page-shell {
+            padding: 1.5rem 1.25rem 3rem;
+        }
+
+        .hero {
+            grid-template-columns: 4.75rem minmax(0, 1fr);
+            gap: 1rem;
+        }
+
+        .portrait-wrap {
+            width: 4.75rem;
+        }
+
+        .identity-row {
+            gap: 0.65rem;
+        }
+
+        h1 {
+            font-size: clamp(1.75rem, 8vw, 2.2rem);
+        }
+
+        .social-links {
+            gap: 0.35rem 0.75rem;
+        }
+
+        .introduction p {
+            grid-column: 1 / -1;
+            font-size: 1rem;
+        }
+
+        .collections {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-top: 2.25rem;
+        }
+
+        .work a,
+        .thing {
+            min-height: 2.2rem;
+        }
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+        .hero,
+        .collections {
+            animation: reveal 620ms cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+
+        .collections {
+            animation-delay: 100ms;
+        }
+    }
+
+    @keyframes reveal {
+        from {
+            opacity: 0;
+            transform: translateY(0.5rem);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>

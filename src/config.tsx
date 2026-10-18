@@ -39,14 +39,15 @@ export type SiteConfig = {
 
 export const CONFIG: SiteConfig = {
   meta: {
-    title: "Huss Hegazy",
-    description: "Huss Hegazy Website",
+    title: "Hussein Hegazy",
+    description:
+      "Hussein Hegazy is a software developer currently working at Shopify.",
     image: {
       src: "/headshot.jpg",
-      alt: "Huss Hegazy",
+      alt: "Hussein Hegazy",
     },
   },
-  name: "Huss Hegazy",
+  name: "Hussein Hegazy",
   headshot: "/headshot.jpg",
   title: "Software Developer",
   description: `👋 Hi!`,

@@ -1,4 +1,61 @@
-@import './prism.css';
+@import "./prism.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+    font-family: "Atkinson";
+    src: url("/fonts/atkinson-regular.woff") format("woff");
+    font-display: swap;
+    font-style: normal;
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: "Atkinson";
+    src: url("/fonts/atkinson-bold.woff") format("woff");
+    font-display: swap;
+    font-style: normal;
+    font-weight: 700;
+}
+
+:root {
+    color-scheme: light;
+    --paper: #e9e2d0;
+    --panel: #f5f1e6;
+    --ink: #38402e;
+    --muted: #686d5d;
+    --accent: #7d8658;
+    --accent-strong: #59623e;
+    --line: rgba(56, 64, 46, 0.22);
+    background: var(--paper);
+    font-family: "Atkinson", Arial, sans-serif;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    min-width: 20rem;
+    background: var(--paper);
+}
+
+body {
+    min-height: 100svh;
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    transition: background-color 180ms ease, color 180ms ease;
+}
+
+img {
+    max-width: 100%;
+}
+
+::selection {
+    background: var(--accent);
+    color: var(--ink);
+}
